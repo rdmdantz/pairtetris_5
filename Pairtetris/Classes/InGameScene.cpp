@@ -1,5 +1,4 @@
 #include "InGameScene.h"
-
 USING_NS_CC;
 
 Scene* CSInGame::createScene()
@@ -18,9 +17,25 @@ bool CSInGame::init()
         return false;
     }
     
+
+	for (int i = 0; i < n_columns; i++)
+	{
+		for (int j = 0; j < n_rows; j++)
+		{
+			map[i][j] = 0;
+		}
+	}
+
+	map[0][0] = 1;
+	map[1][2] = 2;
+	map[3][3] = -1;
+
+	
+
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
 
+	
    
     auto closeItem = MenuItemImage::create(
                                            "CloseNormal.png",
@@ -35,24 +50,60 @@ bool CSInGame::init()
     menu->setPosition(Point::ZERO);
     this->addChild(menu, 1);
 
-    
-    auto label = LabelTTF::create("Hello World", "Arial", 24);
-    
+    auto sprite_BG = Sprite::create("menu-bg.jpg");
+	sprite_BG->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+	this->addChild(sprite_BG, 0);
 
-    label->setPosition(Point(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
+	auto sprite_FR = Sprite::create("gameframe.png");
+	sprite_FR->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+	this->addChild(sprite_FR, 0);
 
-    this->addChild(label, 1);
+	//auto block_red = Sprite::create("block.png");
+	//block_red->setPosition(Point(visibleSize.width / 2 + origin.x - 150, visibleSize.height / 2 + origin.y));
+	//block_red->setColor(cocos2d::Color3B(245, 5, 5));
+	//this->addChild(block_red, 1);
 
-    auto sprite = Sprite::create("HelloWorld.png");
+	//auto block_blue = Sprite::create("block.png");
+	//block_blue->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+	//block_blue->setColor(cocos2d::Color3B(5, 245, 5));
+	//this->addChild(block_blue, 1);
 
-    sprite->setPosition(Point(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+	//auto block_green = Sprite::create("block.png");
+	//block_green->setPosition(Point(visibleSize.width / 2 + origin.x + 150, visibleSize.height / 2 + origin.y));
+	//block_green->setColor(cocos2d::Color3B(5, 5, 245));
+	//this->addChild(block_green, 1);
 
-    this->addChild(sprite, 0);
+	//BlockObject *_temp;
+	//_temp = new BlockObject(this, 1);
+	//this->addChild(_temp, 2);
+
+	/*for (int i = 0; i < n_columns; i++)
+	{
+		for (int j = 0; j < n_rows; j++)
+		{
+			if (map[i][j] != 0)
+			{
+				BlockObject *bn;
+				bn = new BlockObject(this);
+				this->addChild(bn, 2);
+			}
+		}
+	}*/
+
+	BlockObject *bn;
+	bn = new BlockObject(this);
+	this->addChild(bn, 2);
+
+	scheduleUpdate();
+
     
     return true;
 }
 
+void CSInGame::update(float delta)
+{
+
+}
 
 void CSInGame::menuCloseCallback(Ref* pSender)
 {

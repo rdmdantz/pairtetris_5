@@ -2,6 +2,7 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "CBlockObject.h"
 
 class CSInGame : public cocos2d::Layer
 {
@@ -11,7 +12,14 @@ public:
 
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();  
-    
+
+	static const int n_columns = 10;
+	static const int n_rows = 23;
+	int map[n_columns][n_rows];
+
+
+	void update(float delta);
+
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
     
