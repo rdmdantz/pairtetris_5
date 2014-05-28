@@ -1,4 +1,5 @@
 #include "InGameScene.h"
+#include "BlockManager.h"
 USING_NS_CC;
 
 Scene* CSInGame::createScene()
@@ -18,17 +19,7 @@ bool CSInGame::init()
     }
     
 
-	for (int i = 0; i < n_columns; i++)
-	{
-		for (int j = 0; j < n_rows; j++)
-		{
-			map[i][j] = 0;
-		}
-	}
-
-	map[0][0] = 1;
-	map[1][2] = 2;
-	map[3][3] = -1;
+	
 
 	
 
@@ -90,9 +81,12 @@ bool CSInGame::init()
 		}
 	}*/
 
-	BlockObject *bn;
-	bn = new BlockObject(this);
-	this->addChild(bn, 2);
+//	CBlockObject *bn;
+///	bn = new CBlockObject(this);
+//	this->addChild(bn, 2);
+
+	CBlockManager *Manager = new CBlockManager(this);
+	this->addChild(Manager, 2);
 
 	scheduleUpdate();
 
